@@ -1,0 +1,6 @@
+FC = gfortran
+
+FFLAGS  = -O2 -m$(BITS) -fbacktrace -ffree-line-length-none -x f95-cpp-input
+LDFLAGS = -O2 -m$(BITS) -fbacktrace
+
+BITS = 64

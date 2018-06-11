@@ -1,0 +1,98 @@
+###################################################################################################################################
+# Registry for TRD in the FAST Modularization Framework
+# This Registry file is used to create MODULE TRD_Types, which contains all of the user-defined types needed in TRD.
+# It also contains copy, destroy, pack, and unpack routines associated with each defined data types.
+# Entries are of the form
+# keyword <TRD/TRD> <TypeName> <FieldType> <FieldName> <Dims> <IO> <DNAME> <DESCRIP> <UNITS>
+#
+# Use ^ as a shortcut for the value from the previous line.
+###################################################################################################################################
+
+# ..... Input File data .......................................................................................................
+typedef TRD/TRD TRD_InputFile CHARACTER(1024) TRDFileName - - - "Name of the input file; remove if there is no file" -
+typedef	^		^				INTEGER			TRD_CMODE	-	-	-	"control mode {0:none; 1:damping of one mode; 2:damping of all vibrations}" 	-
+typedef	^		^				ReKi			TRD_K       {2}	-	-	"TRD K vector"	-
+typedef	^		^				ReKi			TRD_L       {2}	-	-	"TRD L vector"	-
+typedef	^		^				ReKi			TRD_M  	    -	-	-	"TRD modal mass of the first mode"	kg
+typedef	^		^				ReKi			TRD_F0  	-	-	-	"TRD frequency of the mode to be damped"	"Hz"
+typedef	^		^				ReKi			TRD_MC  	-	-	-	"TRD mass"	kg
+typedef	^		^				ReKi			TRD_RC  	-	-	-	"TRD radius"	m
+typedef	^		^				ReKi			TRD_AON	    -	-	-	"TRD activation threshold" -
+typedef	^		^				ReKi			TRD_AOFF    -	-	-	"TRD deactivation threshold" -
+typedef	^		^				ReKi			TRD_P		{3}	-	-	"position vector of TRD w.r.t. nacelle"	m
+typedef ^       ^               ReKi            TRD_Afilter {4}{4}  -   -   "A matrix for filter"   -
+typedef ^       ^               ReKi            TRD_Bfilter {4}  -   -   "B matrix for filter"   -
+typedef ^       ^               ReKi            TRD_Cfilter {4}  -   -   "C matrix for filter"   -
+typedef ^       ^               ReKi            TRD_Dfilter -   -   -   "D matrix for filter"   -
+typedef ^       ^               ReKi            TRD_Apid    {2}{2}  -   -   "A matrix for filter"   -
+typedef ^       ^               ReKi            TRD_Bpid    {2}  -   -   "B matrix for filter"   -
+typedef ^       ^               ReKi            TRD_Cpid    {2}  -   -   "C matrix for filter"   -
+typedef ^       ^               ReKi            TRD_Dpid    -   -   -   "D matrix for filter"   -
+typedef	^		^				ReKi			TRD_PHI_DSP	-	-	-	"TRD_PHI initial position"	radians
+# ..... Initialization data .......................................................................................................
+# Define inputs that the initialization routine may need here:
+# e.g., the name of the input file, the file root name, etc.
+typedef   TRD/TRD   InitInputType   CHARACTER(1024)   InputFile   -   -   -   "Name of the input file; remove if there is no file" -
+typedef	^	InitInputType	CHARACTER(1024)	RootName	-	-	-	"RootName for writing output files"	-
+typedef		^		^				ReKi			Gravity	-	-	-	"Gravitational acceleration"	m/s^2
+typedef	^		^				ReKi			r_N_O_G		{3}	-	-	"nacelle origin for setting up mesh"	-
+# Define outputs from the initialization routine here:
+typedef ^ InitOutputType SiKi DummyInitOut - - - "dummy init output" -
+#typedef ^ InitOutputType CHARACTER(10) WriteOutputHdr {:} - - "Names of the output-to-file channels" -
+#typedef ^ InitOutputType CHARACTER(10) WriteOutputUnt {:}- - "Units of the output-to-file channels" -
+
+# ..... States ....................................................................................................................
+# Define continuous (differentiable) states here:
+typedef	^		ContinuousStateType	ReKi		TRD_x			{4} - -  "Continuous States" -
+typedef	^		ContinuousStateType	ReKi		TRD_xfiltervel	{4} - -  "Continuous States" -
+typedef	^		ContinuousStateType	ReKi		TRD_xfilteracc	{4} - -  "Continuous States" -
+typedef	^		ContinuousStateType	ReKi		TRD_xpid		{2} - -  "Continuous States" -
+# Define discrete (nondifferentiable) states here:
+typedef ^ DiscreteStateType ReKi DummyDiscState - - - "Remove this variable if you have discrete states" -
+# Define constraint states here:
+typedef ^ ConstraintStateType ReKi DummyConstrState - - - "Remove this variable if you have constraint states" -
+# Define any other states (e.g. logical states):
+typedef ^ 		OtherStateType 	Reki DummyOtherState - - - "Remove this variable if you have other/logical states" -
+
+# Define any misc data used only for efficiency purposes (indices for searching in an array, copies of previous calculations of output
+# at a given time, etc.) or other data that do not depend on time
+typedef ^ 		MiscVarType 	Reki 			F_stop   {2} - - "Stop forces" -
+typedef	^		MiscVarType		ReKi			F_ext	{2}	-	-	"External forces (user defined)"	-
+typedef	^		MiscVarType     ReKi			CE	{2}	-	-	"Control error"	-
+typedef	^		MiscVarType		ReKi			PHIDD	-   -	-	"Angular acceleration of the damper"	-
+typedef	^		MiscVarType		ReKi			VA	-   -	-	"Vibration amplitude"	-
+typedef	^		MiscVarType		ReKi			A	-   -	-	"Activation"	-
+# ..... Parameters ................................................................................................................
+# Define parameters here:
+# Time step for integration of continuous states (if a fixed-step integrator is used) and update of discrete states:
+typedef ^ ParameterType DbKi DT - - - "Time step for cont. state integration & disc. state update" seconds
+typedef  ^     ^           CHARACTER(1024) RootName   -   -   -   "RootName for writing output files"	-
+typedef	^		^				INTEGER			CMODE	-	-	-	"control mode {0:none; 1:damping of one mode; 2:damping of all vibrations}" 	-
+typedef	^		^				ReKi			K	    {2}	-	-	"TRD K vector"	-
+typedef	^		^				ReKi			L	    {2}	-	-	"TRD L vector"	-
+typedef	^		^				ReKi			M  	    -	-	-	"TRD modal mass of the first mode"	kg
+typedef	^		^				ReKi			F0  	-	-	-	"TRD frequency of the first mode to be damped"	"Hz"
+typedef	^		^				ReKi			MC  	-	-	-	"TRD mass"  kg
+typedef	^		^				ReKi			RC  	-	-	-	"TRD radius"  m
+typedef	^		^				ReKi			AON    	-	-	-	"TRD activation threshold" -
+typedef	^		^				ReKi			AOFF   	-	-	-	"TRD deactivation threshold" -
+typedef	^		^				ReKi			P		{3}	-	-	"position of TRDs w.r.t. nacelle"	m
+typedef ^       ^               ReKi            Afilter {4}{4}  -   -   "A matrix for filter"   -
+typedef ^       ^               ReKi            Bfilter {4}  -   -   "B matrix for filter"   -
+typedef ^       ^               ReKi            Cfilter {4}  -   -   "C matrix for filter"   -
+typedef ^       ^               ReKi            Dfilter -   -   -   "D matrix for filter"   -
+typedef ^       ^               ReKi            Apid    {2}{2}  -   -   "A matrix for pid"   -
+typedef ^       ^               ReKi            Bpid    {2}  -   -   "B matrix for pid"   -
+typedef ^       ^               ReKi            Cpid    {2}  -   -   "C matrix for pid"   -
+typedef ^       ^               ReKi            Dpid    -   -   -   "D matrix for pid"   -
+typedef	^		^				ReKi			PHI_DSP	-	-	-	"TRD_PHI initial position"	radians
+typedef	^		^				ReKi			F_ext	{3}	-	-	"External forces (for user modification)"	-
+typedef	^		^				ReKi			Gravity	-	-	-	"Gravitational acceleration"	"m/s^2"
+# ..... Inputs ....................................................................................................................
+# Define inputs that are contained on the mesh here:
+typedef   ^                            InputType                     MeshType                 Mesh                     -         -         -         "Displacements at the TRD reference point P in the inertial frame" -
+# ..... Outputs ...................................................................................................................
+# Define outputs that are contained on the mesh here:
+typedef ^   OutputType          MeshType        Mesh                     -         -         -         "Loads at the TRD reference point in the inertial frame" -
+# Define outputs that are not on this mesh here:
+#typedef	^	OutputType	ReKi	WriteOutput	{:}	-	-	"Data to be written to an output file: see WriteOutputHdr for names of each variable"	"see WriteOutputUnt"
