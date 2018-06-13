@@ -101,6 +101,7 @@ IMPLICIT NONE
     REAL(ReKi)  :: PHIDD      !< Angular acceleration of the damper [-]
     REAL(ReKi)  :: VA      !< Vibration amplitude [-]
     REAL(ReKi)  :: A      !< Activation [-]
+    REAL(ReKi)  :: FC      !< Control force [-]
   END TYPE TRD_MiscVarType
 ! =======================
 ! =========  TRD_ParameterType  =======
@@ -1379,6 +1380,7 @@ CONTAINS
     DstMiscData%PHIDD = SrcMiscData%PHIDD
     DstMiscData%VA = SrcMiscData%VA
     DstMiscData%A = SrcMiscData%A
+    DstMiscData%FC = SrcMiscData%FC
  END SUBROUTINE TRD_CopyMisc
 
  SUBROUTINE TRD_DestroyMisc( MiscData, ErrStat, ErrMsg )
@@ -1433,6 +1435,7 @@ CONTAINS
       Re_BufSz   = Re_BufSz   + 1  ! PHIDD
       Re_BufSz   = Re_BufSz   + 1  ! VA
       Re_BufSz   = Re_BufSz   + 1  ! A
+      Re_BufSz   = Re_BufSz   + 1  ! FC
   IF ( Re_BufSz  .GT. 0 ) THEN 
      ALLOCATE( ReKiBuf(  Re_BufSz  ), STAT=ErrStat2 )
      IF (ErrStat2 /= 0) THEN 
@@ -1471,6 +1474,8 @@ CONTAINS
       ReKiBuf ( Re_Xferred:Re_Xferred+(1)-1 ) = InData%VA
       Re_Xferred   = Re_Xferred   + 1
       ReKiBuf ( Re_Xferred:Re_Xferred+(1)-1 ) = InData%A
+      Re_Xferred   = Re_Xferred   + 1
+      ReKiBuf ( Re_Xferred:Re_Xferred+(1)-1 ) = InData%FC
       Re_Xferred   = Re_Xferred   + 1
  END SUBROUTINE TRD_PackMisc
 
@@ -1545,6 +1550,8 @@ CONTAINS
       OutData%VA = ReKiBuf( Re_Xferred )
       Re_Xferred   = Re_Xferred + 1
       OutData%A = ReKiBuf( Re_Xferred )
+      Re_Xferred   = Re_Xferred + 1
+      OutData%FC = ReKiBuf( Re_Xferred )
       Re_Xferred   = Re_Xferred + 1
  END SUBROUTINE TRD_UnPackMisc
 

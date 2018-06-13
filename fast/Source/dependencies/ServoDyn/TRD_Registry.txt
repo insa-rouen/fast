@@ -62,6 +62,7 @@ typedef	^		MiscVarType     ReKi			CE	{2}	-	-	"Control error"	-
 typedef	^		MiscVarType		ReKi			PHIDD	-   -	-	"Angular acceleration of the damper"	-
 typedef	^		MiscVarType		ReKi			VA	-   -	-	"Vibration amplitude"	-
 typedef	^		MiscVarType		ReKi			A	-   -	-	"Activation"	-
+typedef	^		MiscVarType		ReKi			FC	-   -	-	"Control force"	-
 # ..... Parameters ................................................................................................................
 # Define parameters here:
 # Time step for integration of continuous states (if a fixed-step integrator is used) and update of discrete states:

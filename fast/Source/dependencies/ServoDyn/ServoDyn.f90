@@ -1082,7 +1082,7 @@ SUBROUTINE SrvD_CalcOutput( t, u, p, x, xd, z, OtherState, y, m, ErrStat, ErrMsg
    AllOuts(NTRD_VA  ) = m%NTRD%VA
    AllOuts(NTRD_CE1 ) = m%NTRD%CE(1)
    AllOuts(NTRD_CE2 ) = m%NTRD%CE(2)
-   AllOuts(NTRD_FC ) = y%NTRD%Mesh%Force(1,1)
+   AllOuts(NTRD_FC ) = m%NTRD%FC
       
    !...............................................................................................................................   
    ! Place the selected output channels into the WriteOutput(:) array with the proper sign:
