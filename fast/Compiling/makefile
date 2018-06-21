@@ -182,7 +182,6 @@ ifeq ($(OS),Windows_NT)
 else
       # Linux/Mac
    DEL_CMD   = rm -f
-   INTER_DIR = Obj_lin$(BITS)
    MD_CMD    = @mkdir -p
    CP_CMD    = cp
    OBJ_EXT   = .o
@@ -197,8 +196,10 @@ else
       endif
    else
       ifeq ($(UNAME), Darwin)
+         INTER_DIR = Obj_dar$(BITS)
          EXE_EXT   = _gdar$(BITS)
       else
+         INTER_DIR = Obj_lin$(BITS)
          EXE_EXT   = _glin$(BITS)
       endif
    endif
