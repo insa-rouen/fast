@@ -745,7 +745,7 @@ SUBROUTINE TRD_CalcOutput( Time, u, p, x, xd, z, OtherState, y, m, ErrStat, ErrM
       ! forces in global coordinates
       y%Mesh%Force(:,1) =  matmul(transpose(u%Mesh%Orientation(:,:,1)),F_P_N)
      
-      m%FC=y%Mesh%Force(1,1)     
+      m%FC=F_P_N(1) 
      
       ! Moments on nacelle in local coordinates
       M_P_N(1) = 0.0_ReKi !- F_z_TRDY_P_N * x%TRD_x(3)
