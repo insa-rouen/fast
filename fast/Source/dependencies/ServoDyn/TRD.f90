@@ -829,13 +829,13 @@ SUBROUTINE TRD_CalcContStateDeriv( Time, u, p, x, xd, z, OtherState, m, dxdt, Er
           dxdt%TRD_x(2) = -1.0*K/p%M*x%TRD_x(1)+(x%TRD_x(1)-position(1))*p%L(1)
     
           PSI1=ATAN2(TWOPIF*x%TRD_x(2),dxdt%TRD_x(2))
-          PSI2=ATAN2(TWOPIF*x%TRD_x(1),x%TRD_x(2))
+          PSI2=ATAN2(TWOPIF*x%TRD_x(1),dxdt%TRD_x(1))
     
           TP1=PI/2.0_ReKi+PSI1
           TP2=PI+PSI2
     
           E1=TP1-x%TRD_x(3)
-          E2=TP2-x%TRD_x(3)
+          E2=TP2-x%TRD_x(4)
     
           N1=CEILING((-1.0_ReKi*PI-E1)/(2.0_ReKi*PI))
           N2=CEILING((-1.0_ReKi*PI-E2)/(2.0_ReKi*PI))
