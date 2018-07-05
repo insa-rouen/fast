@@ -868,10 +868,10 @@ SUBROUTINE SrvD_UpdateStates( t, n, Inputs, InputTimes, p, x, xd, z, OtherState,
             CALL SetErrStat( ErrStat2, ErrMsg2, ErrStat, ErrMsg, RoutineName )
          
             ! destroy these for the next call to TRD_UpdateStates
-!         DO i=1,SIZE(utrd)
-!            CALL TRD_DestroyInput(utrd(i), ErrStat2, ErrMsg2)
-!               CALL SetErrStat(ErrStat2,ErrMsg2,ErrStat,ErrMsg,RoutineName)
-!         END DO       
+         DO i=1,SIZE(utrd)
+            CALL TRD_DestroyInput(utrd(i), ErrStat2, ErrMsg2)
+               CALL SetErrStat(ErrStat2,ErrMsg2,ErrStat,ErrMsg,RoutineName)
+         END DO       
          
    END IF
             

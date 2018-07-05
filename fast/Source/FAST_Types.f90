@@ -3,7 +3,7 @@
 ! WARNING This file is generated automatically by the FAST registry.
 ! Do not edit.  Your changes to this file will be lost.
 !
-! FAST Registry (v3.02.00, 7-Jul-2016)
+! FAST Registry (v3.02.00, 23-Jul-2016)
 !*********************************************************************************************************************************
 ! FAST_Types
 !.................................................................................................................................
@@ -34,6 +34,7 @@ MODULE FAST_Types
 USE ElastoDyn_Types
 USE BeamDyn_Types
 USE TMD_Types
+USE TRD_Types
 USE ServoDyn_Types
 USE IfW_UniformWind_Types
 USE IfW_TSFFWind_Types
@@ -451,7 +452,7 @@ IMPLICIT NONE
     TYPE(MeshMapType)  :: HD_M_P_2_SD_P      !< Map HydroDyn Morison Point to SubDyn y2Mesh Point [-]
     TYPE(MeshMapType)  :: SD_P_2_HD_M_L      !< Map SubDyn y2Mesh Point to HydroDyn Morison Line2 [-]
     TYPE(MeshMapType)  :: HD_M_L_2_SD_P      !< Map HydroDyn Morison Line2 to SubDyn y2Mesh Point [-]
-    TYPE(MeshMapType)  :: ED_P_2_SrvD_P_N      !< Map ElastoDyn Nacelle point mesh to ServoDyn/TMD point mesh [-]
+    TYPE(MeshMapType)  :: ED_P_2_SrvD_P_N      !< Map ElastoDyn Nacelle point mesh to ServoDyn/TMD/TRD point mesh [-]
     TYPE(MeshMapType)  :: SrvD_P_2_ED_P_N      !< Map ServoDyn nacelle point mesh to ElastoDyn point mesh on the nacelle [-]
     TYPE(MeshMapType)  :: ED_L_2_SrvD_P_T      !< Map ElastoDyn tower line2 mesh to ServoDyn/TTMD point mesh [-]
     TYPE(MeshMapType)  :: SrvD_P_2_ED_P_T      !< Map ServoDyn tower point mesh to ElastoDyn point load mesh on the tower [-]

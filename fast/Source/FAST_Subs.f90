@@ -4696,8 +4696,12 @@ SUBROUTINE WrVTK_AllMeshes(p_FAST, y_FAST, MeshMapData, ED, BD, AD14, AD, IfW, O
    if (allocated(SrvD%Input)) then
       IF ( SrvD%Input(1)%NTMD%Mesh%Committed ) THEN         
          !call MeshWrVTK(p_FAST%TurbinePos, SrvD%Input(1)%NTMD%Mesh, trim(p_FAST%OutFileRoot)//'.SrvD_NTMD_Motion', y_FAST%VTK_count, p_FAST%VTK_fields, ErrStat2, ErrMsg2 )     
-         call MeshWrVTK(p_FAST%TurbinePos, SrvD%y%NTMD%Mesh, trim(p_FAST%OutFileRoot)//'.SrvD_NTMD', y_FAST%VTK_count, p_FAST%VTK_fields, ErrStat2, ErrMsg2, SrvD%Input(1)%TTMD%Mesh )                
-      END IF      
+         call MeshWrVTK(p_FAST%TurbinePos, SrvD%y%NTMD%Mesh, trim(p_FAST%OutFileRoot)//'.SrvD_NTMD', y_FAST%VTK_count, p_FAST%VTK_fields, ErrStat2, ErrMsg2, SrvD%Input(1)%NTMD%Mesh )                
+      END IF
+      IF ( SrvD%Input(1)%NTRD%Mesh%Committed ) THEN         
+         !call MeshWrVTK(p_FAST%TurbinePos, SrvD%Input(1)%NTMD%Mesh, trim(p_FAST%OutFileRoot)//'.SrvD_NTMD_Motion', y_FAST%VTK_count, p_FAST%VTK_fields, ErrStat2, ErrMsg2 )     
+         call MeshWrVTK(p_FAST%TurbinePos, SrvD%y%NTRD%Mesh, trim(p_FAST%OutFileRoot)//'.SrvD_NTRD', y_FAST%VTK_count, p_FAST%VTK_fields, ErrStat2, ErrMsg2, SrvD%Input(1)%NTRD%Mesh )                
+      END IF  
       IF ( SrvD%Input(1)%TTMD%Mesh%Committed ) THEN 
          !call MeshWrVTK(p_FAST%TurbinePos, SrvD%Input(1)%TTMD%Mesh, trim(p_FAST%OutFileRoot)//'.SrvD_TTMD_Motion', y_FAST%VTK_count, p_FAST%VTK_fields, ErrStat2, ErrMsg2 )     
          call MeshWrVTK(p_FAST%TurbinePos, SrvD%y%TTMD%Mesh, trim(p_FAST%OutFileRoot)//'.SrvD_TTMD', y_FAST%VTK_count, p_FAST%VTK_fields, ErrStat2, ErrMsg2, SrvD%Input(1)%TTMD%Mesh )         

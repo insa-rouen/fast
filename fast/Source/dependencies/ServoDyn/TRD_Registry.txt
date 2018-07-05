@@ -17,6 +17,7 @@ typedef	^		^				ReKi			TRD_M  	    -	-	-	"TRD modal mass of the first mode"	kg
 typedef	^		^				ReKi			TRD_F0  	-	-	-	"TRD frequency of the mode to be damped"	"Hz"
 typedef	^		^				ReKi			TRD_MC  	-	-	-	"TRD mass"	kg
 typedef	^		^				ReKi			TRD_RC  	-	-	-	"TRD radius"	m
+typedef	^		^				ReKi			TRD_TIMEON  -	-	-	"Time before activation of TRD" s
 typedef	^		^				ReKi			TRD_AON	    -	-	-	"TRD activation threshold" -
 typedef	^		^				ReKi			TRD_AOFF    -	-	-	"TRD deactivation threshold" -
 typedef	^		^				ReKi			TRD_P		{3}	-	-	"position vector of TRD w.r.t. nacelle"	m
@@ -75,6 +76,7 @@ typedef	^		^				ReKi			M  	    -	-	-	"TRD modal mass of the first mode"	kg
 typedef	^		^				ReKi			F0  	-	-	-	"TRD frequency of the first mode to be damped"	"Hz"
 typedef	^		^				ReKi			MC  	-	-	-	"TRD mass"  kg
 typedef	^		^				ReKi			RC  	-	-	-	"TRD radius"  m
+typedef	^		^				ReKi			TIMEON    	-	-	-	"Time before activation of TRD" s
 typedef	^		^				ReKi			AON    	-	-	-	"TRD activation threshold" -
 typedef	^		^				ReKi			AOFF   	-	-	-	"TRD deactivation threshold" -
 typedef	^		^				ReKi			P		{3}	-	-	"position of TRDs w.r.t. nacelle"	m

@@ -43,6 +43,7 @@ IMPLICIT NONE
     REAL(ReKi)  :: TRD_F0      !< TRD frequency of the mode to be damped [Hz]
     REAL(ReKi)  :: TRD_MC      !< TRD mass [kg]
     REAL(ReKi)  :: TRD_RC      !< TRD radius [m]
+    REAL(ReKi)  :: TRD_TIMEON      !< Time before activation of TRD [s]
     REAL(ReKi)  :: TRD_AON      !< TRD activation threshold [-]
     REAL(ReKi)  :: TRD_AOFF      !< TRD deactivation threshold [-]
     REAL(ReKi) , DIMENSION(1:3)  :: TRD_P      !< position vector of TRD w.r.t. nacelle [m]
@@ -115,6 +116,7 @@ IMPLICIT NONE
     REAL(ReKi)  :: F0      !< TRD frequency of the first mode to be damped [Hz]
     REAL(ReKi)  :: MC      !< TRD mass [kg]
     REAL(ReKi)  :: RC      !< TRD radius [m]
+    REAL(ReKi)  :: TIMEON      !< Time before activation of TRD [s]
     REAL(ReKi)  :: AON      !< TRD activation threshold [-]
     REAL(ReKi)  :: AOFF      !< TRD deactivation threshold [-]
     REAL(ReKi) , DIMENSION(1:3)  :: P      !< position of TRDs w.r.t. nacelle [m]
@@ -166,6 +168,7 @@ CONTAINS
     DstInputFileData%TRD_F0 = SrcInputFileData%TRD_F0
     DstInputFileData%TRD_MC = SrcInputFileData%TRD_MC
     DstInputFileData%TRD_RC = SrcInputFileData%TRD_RC
+    DstInputFileData%TRD_TIMEON = SrcInputFileData%TRD_TIMEON
     DstInputFileData%TRD_AON = SrcInputFileData%TRD_AON
     DstInputFileData%TRD_AOFF = SrcInputFileData%TRD_AOFF
     DstInputFileData%TRD_P = SrcInputFileData%TRD_P
@@ -234,6 +237,7 @@ CONTAINS
       Re_BufSz   = Re_BufSz   + 1  ! TRD_F0
       Re_BufSz   = Re_BufSz   + 1  ! TRD_MC
       Re_BufSz   = Re_BufSz   + 1  ! TRD_RC
+      Re_BufSz   = Re_BufSz   + 1  ! TRD_TIMEON
       Re_BufSz   = Re_BufSz   + 1  ! TRD_AON
       Re_BufSz   = Re_BufSz   + 1  ! TRD_AOFF
       Re_BufSz   = Re_BufSz   + SIZE(InData%TRD_P)  ! TRD_P
@@ -290,6 +294,8 @@ CONTAINS
       ReKiBuf ( Re_Xferred:Re_Xferred+(1)-1 ) = InData%TRD_MC
       Re_Xferred   = Re_Xferred   + 1
       ReKiBuf ( Re_Xferred:Re_Xferred+(1)-1 ) = InData%TRD_RC
+      Re_Xferred   = Re_Xferred   + 1
+      ReKiBuf ( Re_Xferred:Re_Xferred+(1)-1 ) = InData%TRD_TIMEON
       Re_Xferred   = Re_Xferred   + 1
       ReKiBuf ( Re_Xferred:Re_Xferred+(1)-1 ) = InData%TRD_AON
       Re_Xferred   = Re_Xferred   + 1
@@ -386,6 +392,8 @@ CONTAINS
       OutData%TRD_MC = ReKiBuf( Re_Xferred )
       Re_Xferred   = Re_Xferred + 1
       OutData%TRD_RC = ReKiBuf( Re_Xferred )
+      Re_Xferred   = Re_Xferred + 1
+      OutData%TRD_TIMEON = ReKiBuf( Re_Xferred )
       Re_Xferred   = Re_Xferred + 1
       OutData%TRD_AON = ReKiBuf( Re_Xferred )
       Re_Xferred   = Re_Xferred + 1
@@ -1580,6 +1588,7 @@ CONTAINS
     DstParamData%F0 = SrcParamData%F0
     DstParamData%MC = SrcParamData%MC
     DstParamData%RC = SrcParamData%RC
+    DstParamData%TIMEON = SrcParamData%TIMEON
     DstParamData%AON = SrcParamData%AON
     DstParamData%AOFF = SrcParamData%AOFF
     DstParamData%P = SrcParamData%P
@@ -1651,6 +1660,7 @@ CONTAINS
       Re_BufSz   = Re_BufSz   + 1  ! F0
       Re_BufSz   = Re_BufSz   + 1  ! MC
       Re_BufSz   = Re_BufSz   + 1  ! RC
+      Re_BufSz   = Re_BufSz   + 1  ! TIMEON
       Re_BufSz   = Re_BufSz   + 1  ! AON
       Re_BufSz   = Re_BufSz   + 1  ! AOFF
       Re_BufSz   = Re_BufSz   + SIZE(InData%P)  ! P
@@ -1711,6 +1721,8 @@ CONTAINS
       ReKiBuf ( Re_Xferred:Re_Xferred+(1)-1 ) = InData%MC
       Re_Xferred   = Re_Xferred   + 1
       ReKiBuf ( Re_Xferred:Re_Xferred+(1)-1 ) = InData%RC
+      Re_Xferred   = Re_Xferred   + 1
+      ReKiBuf ( Re_Xferred:Re_Xferred+(1)-1 ) = InData%TIMEON
       Re_Xferred   = Re_Xferred   + 1
       ReKiBuf ( Re_Xferred:Re_Xferred+(1)-1 ) = InData%AON
       Re_Xferred   = Re_Xferred   + 1
@@ -1813,6 +1825,8 @@ CONTAINS
       OutData%MC = ReKiBuf( Re_Xferred )
       Re_Xferred   = Re_Xferred + 1
       OutData%RC = ReKiBuf( Re_Xferred )
+      Re_Xferred   = Re_Xferred + 1
+      OutData%TIMEON = ReKiBuf( Re_Xferred )
       Re_Xferred   = Re_Xferred + 1
       OutData%AON = ReKiBuf( Re_Xferred )
       Re_Xferred   = Re_Xferred + 1

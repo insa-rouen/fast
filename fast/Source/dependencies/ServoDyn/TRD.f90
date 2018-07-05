@@ -611,9 +611,7 @@ SUBROUTINE TRD_RK4( t, n, u, utimes, p, x, xd, z, OtherState, m, ErrStat, ErrMsg
           x%TRD_xfilteracc  = x%TRD_xfilteracc  +  ( k1%TRD_xfilteracc  + 2. * k2%TRD_xfilteracc  + 2. * k3%TRD_xfilteracc  + k4%TRD_xfilteracc  ) / 6. 
           x%TRD_xpid  = x%TRD_xpid  +  ( k1%TRD_xpid  + 2. * k2%TRD_xpid  + 2. * k3%TRD_xpid  + k4%TRD_xpid  ) / 6. 
 
-      ENDIF       
-     ! x%TRD_dxdt = x%TRD_dxdt +  ( k1%TRD_dxdt + 2. * k2%TRD_dxdt + 2. * k3%TRD_dxdt + k4%TRD_dxdt ) / 6.      
-
+      ENDIF   
          ! clean up local variables:
       CALL ExitThisRoutine(  )
          
@@ -920,7 +918,7 @@ SUBROUTINE TRD_CalcContStateDeriv( Time, u, p, x, xd, z, OtherState, m, dxdt, Er
 
       ENDIF
 
-      IF(m%VA < p%AOFF) THEN
+      IF ((m%VA < p%AOFF) .OR. (Time < p%TIMEON)) THEN
 
             m%A = 0.0_ReKi 
 
@@ -1140,6 +1138,10 @@ SUBROUTINE ReadPrimaryFile( InputFile, InputFileData, OutFileRoot, UnEc, ErrStat
       CALL CheckError( ErrStat2, ErrMsg2 )
       
    CALL ReadVar( UnIn, InputFile, InputFileData%TRD_CMODE, "TRD_CMODE", "control mode (0:none; 1:damping of one mode; 2:damping of all vibrations)", ErrStat2, ErrMsg2, UnEc)
+      CALL CheckError( ErrStat2, ErrMsg2 )
+      IF ( ErrStat >= AbortErrLev ) RETURN
+
+   CALL ReadVar(UnIn,InputFile,InputFileData%TRD_TIMEON,"TRD_TIMEON","Time before activation of TRD (s)",ErrStat2,ErrMsg2,UnEc)
       CALL CheckError( ErrStat2, ErrMsg2 )
       IF ( ErrStat >= AbortErrLev ) RETURN
 
@@ -1363,6 +1365,7 @@ SUBROUTINE TRD_SetParameters( InputFileData, p, ErrStat, ErrMsg )
    p%F0 = InputFileData%TRD_F0
    p%MC = InputFileData%TRD_MC
    p%RC = InputFileData%TRD_RC
+   p%TIMEON = InputFileData%TRD_TIMEON
    p%AON = InputFileData%TRD_AON
    p%AOFF = InputFileData%TRD_AOFF
    p%P(:) = InputFileData%TRD_P(:)
