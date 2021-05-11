@@ -1,0 +1,4 @@
+
+~/Eolien/FAST/FAST_glin64 $1 | grep -E -A999 --color "\*|The input file|was not found|Invalid numerical|Invalid numerical input|Invalid logical input|Cannot find uniform wind input file|not an available output channel|WARNING|\.fst|\.wnd|\.bts|\|
+Echo|AbortLevel|TMax|DT|InterpOrder|NumCrctn|DT_UJac|UJacSclFact|CompElast|CompAero|CompInflow|CompServo|CompHydro|CompSub|CompMooring|CompIce|CompUserPtfmLd|CompUserTwrLd|EDFile|BDBldFile\(1\)|BDBldFile\(2\)|BDBldFile\(3\)|InflowFile|AeroFile|ServoFile|HydroFile|SubFile|MooringFile|IceFile|SumPrint|SttsTime|ChkptTime|DT_Out|TStart|OutFileFmt|TabDelim|OutFmt|Linearize|NLinTimes|LinTimes|LinInputs|LinOutputs|LinOutJac|LinOutMod|WrVTK|VTK_type|VTK_fields|VTK_fps\|
+SysUnits|StallMod|UseCm|InfModel|IndModel|AToler|TLModel|HLModel|WindFile|HH|TwrShad|TwrPotent|TwrShadow|TwrFile|CalcTwrAero|AirDens|KinVisc|DTAero|NumFoil|FoilNm|BldNodes|NTwrHt|NTwrRe|NTwrCD|Tower_Wake_Constant"
